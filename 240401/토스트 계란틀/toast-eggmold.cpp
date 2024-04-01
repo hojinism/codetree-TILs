@@ -45,7 +45,7 @@ int main() {
                         int x,y;
                         tie(x,y) = *iter;
                         for(int k=0;k<4;k++){
-                            if(x+dx[k] >= 0 && x+dx[k] <= n+1 && y+dy[k] >= 0 && y+dy[k] <= n+1){
+                            if(x+dx[k] >= 1 && x+dx[k] <= n && y+dy[k] >= 1 && y+dy[k] <= n){
                                 if(!marked[y+dy[k]][x+dx[k]] 
                                 && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
                                 && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
