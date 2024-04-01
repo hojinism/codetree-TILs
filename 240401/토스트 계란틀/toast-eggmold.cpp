@@ -78,7 +78,7 @@ int main() {
             nloop++;
             for(int j=1;j<=n;j++){ //init
                 for(int i=1;i<=n;i++){
-                    cout << arr[j][i] << " ";
+                    // cout << arr[j][i] << " ";
                     marked[j][i] = 0;
                 }
                 cout << endl;
