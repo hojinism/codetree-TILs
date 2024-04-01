@@ -71,9 +71,15 @@ int main() {
                 }
             }
         }
-
+        
         if(hasmoved){
             nloop++;
+        }
+
+        for(int j=1;j<=n;j++){
+            for(int i=1;i<=n;i++){
+                marked[j][i] = 0;
+            }
         }
     }while(hasmoved);
 
