@@ -8,12 +8,15 @@ using namespace std;
 int dx[] = {-1,1,0,0};
 int dy[] = {0,0,-1,1};
 
+int arr[52][52];
+int marked[52][52];
+
+deque<tuple<int,int>> basket;
+
 int main() {
     int n, L, R;
     cin >> n >> L >> R;
 
-    int arr[52][52];
-    int marked[52][52];
     for(int j=0;j<52;j++){
         for(int i=0;i<52;i++){
             arr[j][i] = -500;
@@ -30,34 +33,30 @@ int main() {
     bool hasmoved;
     int nloop = 0;
     do{
-        hasmoved= false;
+        hasmoved = false;
 
-        for(int j=1;j<=n;j++){////
+        for(int j=1;j<=n;j++){
             for(int i=1;i<=n;i++){
                 if(!marked[j][i]){
-                    deque<tuple<int,int>> basket;
+                    basket.clear();
                     basket.push_back(tuple<int,int>(i,j)); //use tuple
-                    // cout << "\n" << i << j << endl;
                     marked[j][i] = 1;
-                    deque<tuple<int,int>>::iterator iter = basket.begin(); //set iterator
-
+                    // deque<tuple<int,int>>::iterator iter = basket.begin(); //set iterator -> push_back과 iter++를 같이 쓰면 절대 안됨! Segmentation fault!!
+                    int index = 0;
                     do{
                         int x,y;
-                        tie(x,y) = *iter;
-                        for(int k=0;k<4;k++){
-                            if(x+dx[k] >= 1 && x+dx[k] <= n && y+dy[k] >= 1 && y+dy[k] <= n){
-                                if(!marked[y+dy[k]][x+dx[k]] 
-                                && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
-                                && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
-                                    basket.push_back(tuple<int,int>(x+dx[k],y+dy[k]));
-                                    marked[y+dy[k]][x+dx[k]] = 1;
-                                    // cout << x+dx[k] << y+dy[k] << " ";
-                                    hasmoved = true;
-                                }
-                            }
+                        tie(x,y) = basket[i];
+                        for(int k=0;k<4;k++){  
+                            if(!marked[y+dy[k]][x+dx[k]] 
+                            && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
+                            && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
+                                basket.push_back(tuple<int,int>(x+dx[k],y+dy[k]));
+                                marked[y+dy[k]][x+dx[k]] = 1;
+                                hasmoved = true;
+                            }                 
                         }
-                        iter++;
-                    }while(iter!=basket.end());
+                        index++;
+                    }while(index<basket.size());
 
                     int basket_sum = 0;
                     for(tuple<int,int> temp : basket){
@@ -80,13 +79,10 @@ int main() {
             nloop++;
             for(int j=1;j<=n;j++){ //init
                 for(int i=1;i<=n;i++){
-                    // cout << arr[j][i] << " ";
                     marked[j][i] = 0;
                 }
-                // cout << endl;
             }
         }
-        // hasmoved=false;////
     }while(hasmoved);
 
     cout << nloop;
