@@ -81,7 +81,7 @@ int main() {
                     // cout << arr[j][i] << " ";
                     marked[j][i] = 0;
                 }
-                cout << endl;
+                // cout << endl;
             }
         }
         // hasmoved=false;////
