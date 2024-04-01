@@ -41,12 +41,15 @@ int main() {
                     basket.clear();
                     basket.push_back(tuple<int,int>(i,j)); //use tuple
                     marked[j][i] = 1;
+                    // cout << i << " " << j << endl;
                     // deque<tuple<int,int>>::iterator iter = basket.begin(); //set iterator -> push_back과 iter++를 같이 쓰면 절대 안됨! Segmentation fault!!
                     int index = 0;
                     do{
                         int x,y;
-                        tie(x,y) = basket[i];
+                        tie(x,y) = basket.at(index);
+                        // cout << "x" << x << "y" << y << basket.size() << endl;
                         for(int k=0;k<4;k++){  
+                            // cout << marked[y+dy[k]][x+dx[k]] << " " << arr[y][x] << " " << arr[y+dy[k]][x+dx[k]] << endl;
                             if(!marked[y+dy[k]][x+dx[k]] 
                             && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
                             && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
