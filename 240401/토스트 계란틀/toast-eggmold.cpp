@@ -45,13 +45,15 @@ int main() {
                         int x,y;
                         tie(x,y) = *iter;
                         for(int k=0;k<4;k++){
-                            if(!marked[y+dy[k]][x+dx[k]] 
-                            && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
-                            && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
-                                basket.push_back(tuple<int,int>(x+dx[k],y+dy[k]));
-                                marked[y+dy[k]][x+dx[k]] = 1;
-                                // cout << x+dx[k] << y+dy[k] << " ";
-                                hasmoved = true;
+                            if(x+dx[k] >= 0 && x+dx[k] <= n+1 && y+dy[k] >= 0 && y+dy[k] <= n+1){
+                                if(!marked[y+dy[k]][x+dx[k]] 
+                                && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])>=L 
+                                && abs(arr[y+dy[k]][x+dx[k]]-arr[y][x])<=R){
+                                    basket.push_back(tuple<int,int>(x+dx[k],y+dy[k]));
+                                    marked[y+dy[k]][x+dx[k]] = 1;
+                                    // cout << x+dx[k] << y+dy[k] << " ";
+                                    hasmoved = true;
+                                }
                             }
                         }
                         iter++;
