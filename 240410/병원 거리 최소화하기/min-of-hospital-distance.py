@@ -1,7 +1,8 @@
-# 20240409 20:30 -- 22:44
+# 20240409 20:30 -- 22:44 / 20240410 10:15 --
 
-# import math
-# import time
+
+import math
+import time
 
 
 def dist(p1, p2):
@@ -15,7 +16,7 @@ def combination(n, new_arr, c):
     if len(new_arr) == n:
         combset.append(new_arr)
         return
-    for i in range(len(combarr)):
+    for i in range(c, len(combarr)):
         combination(n, new_arr + [combarr[i]], i+1)
 
 
@@ -29,9 +30,8 @@ for j in range(N):
     for i in range(N):
         if arr[j][i] == 1:
             lh.append([i, j])
-        if arr[j][i] == 2:
+        elif arr[j][i] == 2:
             lc.append([i, j])
-
 
 corr = [[dist(ph, pc) for ph in lh] for pc in lc]
 
