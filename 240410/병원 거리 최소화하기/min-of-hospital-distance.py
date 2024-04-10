@@ -1,3 +1,9 @@
+# 20240409 20:30 -- 22:44
+
+# import math
+# import time
+
+
 def dist(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
@@ -13,6 +19,8 @@ def combination(n, new_arr, c):
         combination(n, new_arr + [combarr[i]], i+1)
 
 
+# start = time.time()
+
 N, M = list(map(int, input().split()))
 arr = [list(map(int, input().split())) for _ in range(N)]
 lc = []
@@ -24,10 +32,18 @@ for j in range(N):
         if arr[j][i] == 2:
             lc.append([i, j])
 
+
 corr = [[dist(ph, pc) for ph in lh] for pc in lc]
 
+# end = time.time()
+# print(f"{end - start:.5f} sec")
+
 combset = []
-combination(M, [i for i in range(len(lc))], [], 0)
+combarr = [i for i in range(len(lc))]
+combination(M, [], 0)
+
+# end = time.time()
+# print(f"{end - start:.5f} sec")
 
 mindist = 4*N*N*M
 for comb in combset:
@@ -35,5 +51,8 @@ for comb in combset:
     for ih in range(len(lh)):
         distsum += min(corr[ic][ih] for ic in comb)
     mindist = min(mindist, distsum)
+
+# end = time.time()
+# print(f"{end - start:.5f} sec")
 
 print(f'{mindist}')
